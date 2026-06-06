@@ -26,4 +26,4 @@ export const updateNoteSchema = z
   .strict()
   .refine((data) => Object.values(data).some((value) => value !== undefined), {
     message: "At least one field must be provided for update",
-  });                            
+  });                                   
