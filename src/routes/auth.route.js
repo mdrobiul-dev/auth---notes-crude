@@ -2,7 +2,6 @@ import express from "express";
 import {
   loginSchema,
   registerSchema,
-  validate,
 } from "../validators/auth.validator.js";
 import {
   login,
@@ -12,6 +11,7 @@ import {
 } from "../controllers/auth.controller.js";
 import { authLimiter } from "../middleware/rateLimiter.middleware.js";
 import { protect } from "../middleware/auth.middleware.js";
+import { validate } from "../validators/validator.js";
 
 const router = express.Router();
 
