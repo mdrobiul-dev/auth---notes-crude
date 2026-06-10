@@ -11,4 +11,4 @@ router.use("/user", userRoutes)
 router.use("/admin", adminRoutes)
 router.use("/notes", noteRoutes)
 
-export default router
+export default router                  
