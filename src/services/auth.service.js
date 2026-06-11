@@ -61,7 +61,7 @@ export const refreshAccessToken = async (refreshToken) => {
 
   if (!user) throw new AppError('Invalid or expired refresh token', 401);
 
-  const newAccessToken = user.generateAuthToken();
+  const newAccessToken = user.generateToken();
   return { accessToken: newAccessToken, user };
 };
 
