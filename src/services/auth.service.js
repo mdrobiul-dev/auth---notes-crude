@@ -20,10 +20,11 @@ export const registerUser = async (userData) => {
   });
 
   const token = await user.generateToken();
+  const refreshToken = await generateRefreshToken(user)
 
   const userRespone = user.toSafeObject();
 
-  return { user: userRespone, token };
+  return { user: userRespone, accessToken: token, refreshToken };
 };
 
 export const loginUser = async (email, password) => {
@@ -34,10 +35,11 @@ export const loginUser = async (email, password) => {
   }
 
   const token = await user.generateToken();
+   const refreshToken = await generateRefreshToken(user)
 
   const userResponse = user.toSafeObject();
 
-  return { user: userResponse, token };
+  return { user: userResponse, accessToken: token, refreshToken };
 };
 
 export const generateRefreshToken = async (user) => {
