@@ -21,8 +21,7 @@ export const registerUser = async (userData) => {
 
   const token = await user.generateToken();
 
-  const userRespone = user.toObject();
-  delete userRespone.password;
+  const userRespone = user.toSafeObject();
 
   return { user: userRespone, token };
 };
@@ -36,8 +35,7 @@ export const loginUser = async (email, password) => {
 
   const token = await user.generateToken();
 
-  const userResponse = user.toObject();
-  delete userResponse.password;
+  const userResponse = user.toSafeObject();
 
   return { user: userResponse, token };
 };
