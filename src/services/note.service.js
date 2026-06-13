@@ -21,7 +21,7 @@ export const updateNote = async (noteId, userId, updatedData) => {
   const note = await Note.findOneAndUpdate(
     { _id: noteId, user: userId },
     updatedData,
-    { new: true, runValidators: true },
+    { returnDocument: 'after', runValidators: true },
   );
   if (!note) throw new AppError("Note not found or access denied");
   return note

@@ -6,8 +6,7 @@ export const getUser = async (userId) => {
 
   if (!user) throw new AppError("User not found", 404);
 
-  const userObj = user.toObject();
-  delete userObj.password;
+  const userObj = user.toSafeObject();
 
   return userObj;
 };
@@ -24,8 +23,7 @@ export const updateProfileUser = async (userId, userData) => {
 
   await user.save();
 
-  const updatedUserObj = user.toObject();
-  delete updatedUserObj.password;
+  const updatedUserObj = user.toSafeObject();
 
   return updatedUserObj;
 };

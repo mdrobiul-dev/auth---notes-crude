@@ -13,6 +13,7 @@ export const protect = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
     }
 
+
     if (!token) {
       throw new AppError("Authorization fail , please login again", 401);
     }
