@@ -18,6 +18,17 @@ const noteSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    category: {
+    type: String,
+    enum: ['work', 'personal', 'ideas', 'reminders', 'other'],
+    default: 'other',
+    trim: true,
+    lowercase: true
+  },
+  isFavorite: {
+    type: Boolean,
+    default: false
+  }
   },
   {
     timestamps: true,
@@ -25,6 +36,7 @@ const noteSchema = mongoose.Schema(
 );
 
 noteSchema.index({ user: 1, createdAt: -1 });
+noteSchema.index({ title: 'text', content: 'text' });
 
 const Note = mongoose.model("Note", noteSchema);
 
