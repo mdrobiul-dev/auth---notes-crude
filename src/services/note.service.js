@@ -7,17 +7,23 @@ export const createNote = async (noteData, userId) => {
   return note;
 };
 
-
 export const getUserNotes = async (userId, queryParams) => {
-  const { search, sort, page = 1, limit = 10, category, isFavorite } = queryParams;
+  const {
+    search,
+    sort,
+    page = 1,
+    limit = 10,
+    category,
+    isFavorite,
+  } = queryParams;
 
   const filter = { user: userId };
 
   // 1. Search (title + content)
   if (search) {
     filter.$or = [
-      { title: { $regex: search, $options: 'i' } },
-      { content: { $regex: search, $options: 'i' } }
+      { title: { $regex: search, $options: "i" } },
+      { content: { $regex: search, $options: "i" } },
     ];
   }
 
@@ -26,7 +32,7 @@ export const getUserNotes = async (userId, queryParams) => {
     filter.category = category.toLowerCase();
   }
   if (isFavorite !== undefined) {
-    filter.isFavorite = isFavorite === 'true' || isFavorite === true;
+    filter.isFavorite = isFavorite === "true" || isFavorite === true;
   }
 
   // 3. Pagination
@@ -36,8 +42,8 @@ export const getUserNotes = async (userId, queryParams) => {
   // 4. Sorting
   let sortOption = { createdAt: -1 }; // default: newest first
   if (sort) {
-    const sortField = sort.startsWith('-') ? sort.substring(1) : sort;
-    const sortOrder = sort.startsWith('-') ? -1 : 1;
+    const sortField = sort.startsWith("-") ? sort.substring(1) : sort;
+    const sortOrder = sort.startsWith("-") ? -1 : 1;
     sortOption = { [sortField]: sortOrder };
   }
 
@@ -46,8 +52,8 @@ export const getUserNotes = async (userId, queryParams) => {
       .sort(sortOption)
       .skip(skip)
       .limit(limitNum)
-      .select('-__v'),
-    Note.countDocuments(filter)
+      .select("-__v"),
+    Note.countDocuments(filter),
   ]);
 
   const totalPages = Math.ceil(totalResults / limitNum);
@@ -60,8 +66,8 @@ export const getUserNotes = async (userId, queryParams) => {
       totalResults,
       resultsPerPage: limitNum,
       hasNext: parseInt(page) < totalPages,
-      hasPrev: parseInt(page) > 1
-    }
+      hasPrev: parseInt(page) > 1,
+    },
   };
 };
 
