@@ -90,4 +90,4 @@ export const deleteNote = async (noteId, userId) => {
   const note = await Note.findOneAndDelete({ _id: noteId, user: userId });
   if (!note) throw new AppError("Note not found or access denied");
 };
-                 
+                                
