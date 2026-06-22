@@ -1,4 +1,3 @@
-import { promise } from "zod";
 import AppError from "../errors/AppError.js";
 import Note from "../models/note.model.js";
 
@@ -91,3 +90,4 @@ export const deleteNote = async (noteId, userId) => {
   const note = await Note.findOneAndDelete({ _id: noteId, user: userId });
   if (!note) throw new AppError("Note not found or access denied");
 };
+                 
